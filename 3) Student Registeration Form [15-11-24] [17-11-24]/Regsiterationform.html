@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .error {
+            color: red;
+            font-size: 0.875em;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Enhanced Student Registration</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name">
+            <small class="error" id="nameError"></small>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+                <option value="">Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <small class="error" id="genderError"></small>
+        </div>
+        <div class="form-group">
+            <label for="branch">Branch</label>
+            <input type="text" id="branch" name="branch" placeholder="Enter your branch">
+            <small class="error" id="branchError"></small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <small class="error" id="emailError"></small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+            <small class="error" id="phoneError"></small>
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="Enter your address" rows="3"></textarea>
+            <small class="error" id="addressError"></small>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const gender = document.getElementById('gender').value;
+        const branch = document.getElementById('branch').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+
+        // Error elements
+        const nameError = document.getElementById('nameError');
+        const genderError = document.getElementById('genderError');
+        const branchError = document.getElementById('branchError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const addressError = document.getElementById('addressError');
+
+        // Clear previous errors
+        nameError.textContent = '';
+        genderError.textContent = '';
+        branchError.textContent = '';
+        emailError.textContent = '';
+        phoneError.textContent = '';
+        addressError.textContent = '';
+
+        let isValid = true;
+
+        // Validate Name (only letters and spaces)
+        if (name === '') {
+            nameError.textContent = 'Full Name is required';
+            isValid = false;
+        } else if (!/^[a-zA-Z ]+$/.test(name)) {
+            nameError.textContent = 'Full Name should contain only letters and spaces';
+            isValid = false;
+        }
+
+        // Validate Gender (should not be empty)
+        if (gender === '') {
+            genderError.textContent = 'Please select your gender';
+            isValid = false;
+        }
+
+        // Validate Branch (not empty, only letters and spaces)
+        if (branch === '') {
+            branchError.textContent = 'Branch is required';
+            isValid = false;
+        } else if (!/^[a-zA-Z ]+$/.test(branch)) {
+            branchError.textContent = 'Branch should contain only letters and spaces';
+            isValid = false;
+        }
+
+        // Validate Email (basic pattern check)
+        if (email === '') {
+            emailError.textContent = 'Email is required';
+            isValid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+            emailError.textContent = 'Enter a valid email address';
+            isValid = false;
+        }
+
+        // Validate Phone Number (10 digits only)
+        if (phone === '') {
+            phoneError.textContent = 'Phone number is required';
+            isValid = false;
+        } else if (!/^\d{10}$/.test(phone)) {
+            phoneError.textContent = 'Phone number should be 10 digits';
+            isValid = false;
+        }
+
+        // Validate Address (minimum 10 characters)
+        if (address === '') {
+            addressError.textContent = 'Address is required';
+            isValid = false;
+        } else if (address.length < 10) {
+            addressError.textContent = 'Address should be at least 10 characters';
+            isValid = false;
+        }
+
+        return isValid; // Prevent form submission if there are errors
+    }
+</script>
+
+</body>
+</html>
