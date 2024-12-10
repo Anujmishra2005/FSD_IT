@@ -8,6 +8,7 @@ const Refex = () => {
         if(refcount.current==5)
             alert("current refcount="+refcount.current)
         console.log("refcount=",refcount.current)
+
     }
   return (
     <div>
@@ -19,3 +20,8 @@ const Refex = () => {
 }
 
 export default Refex
+
+
+
+// Hext Hook -- UseContext
+// Props Drilling Problem
